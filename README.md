@@ -1,2 +1,2 @@
 # q-config
-Personal configuration and settings files
+Personal configuration and settings files used across different environments
