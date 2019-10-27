@@ -42,16 +42,31 @@ See the documentation link to help resolve cases where the laptop boots directly
 
 #### Post-Installation
 There is a [noted issue](https://forums.lenovo.com/t5/Other-Linux-Discussions/X1C6-T480s-low-cTDP-and-trip-temperature-in-Linux/td-p/4028489/highlight/true/page/11) that involves temperature throttling when running Linux on certain Lenovo
-models, causing them to run less efficiently than if the same machines ran Windows. The same linked forum
-page also provides both firmware and BIOS updates for the X1 Carbon Gen 7.
+models, causing them to run less efficiently than if the same machines ran Windows. 
+The same linked forum page also provides both firmware and BIOS
+updates for the X1 Carbon Gen 7.
 
-All firmware updates can be collected and installed at once with the below.
-More details [here](https://itsfoss.com/update-firmware-ubuntu).
+The first firmware update could be install directly with `fwupd`, 
+more details [here](https://itsfoss.com/update-firmware-ubuntu).
 ```
 sudo apt update && sudo apt upgrade -y
 sudo service fwupd start 
 sudo fwupdmgr refresh
 sudo fwupdmgr update
+```
+
+In order to get the second update (BIOS), it was necessary to download the `.cab` file
+manually and then install. To do this, I had to upgrade `fwupd` to a version >= 1.1.3.
+`apt-get` was saying that the 1.0.9 I was on was the latest version, so I had to install
+from the edge channel on `snap` to get the latest version.
+```
+sudo snap install --channel=edge fwupd
+```
+From there, it was necesary to invoke `fwupd` directly with `snap` in order to use
+the newly downloaded version.
+```
+sudo snap start fwupd
+sudo fwupdmgr install Lenovo...SystemFirmware-1.22.cab
 ```
 
 Also, though the page is specifically written for ArchLinux, [this wiki](https://wiki.archlinux.org/index.php/Lenovo_ThinkPad_X1_Carbon_(Gen_6))
