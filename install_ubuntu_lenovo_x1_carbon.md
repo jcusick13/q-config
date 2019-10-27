@@ -39,3 +39,10 @@ See the documentation link to help resolve cases where the laptop boots directly
     * Normal installation
     * Erase disk and install Ubuntu
       * Encryption and LVM left _unchecked_
+
+#### Post-Installation
+There is a [noted issue](https://forums.lenovo.com/t5/Other-Linux-Discussions/X1C6-T480s-low-cTDP-and-trip-temperature-in-Linux/td-p/4028489/highlight/true/page/11) that involves temperature throttling when running Linux on certain Lenovo
+models, causing them to run less efficiently than if the same machines ran Windows. The same linked forum
+page also provides both firmware and BIOS updates for the X1 Carbon Gen 7.
+
+Also, though the page is specifically written for ArchLinux, [this wiki](https://wiki.archlinux.org/index.php/Lenovo_ThinkPad_X1_Carbon_(Gen_6) contains a good starting point for troubleshooting different issues.
