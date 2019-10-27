@@ -45,5 +45,13 @@ There is a [noted issue](https://forums.lenovo.com/t5/Other-Linux-Discussions/X1
 models, causing them to run less efficiently than if the same machines ran Windows. The same linked forum
 page also provides both firmware and BIOS updates for the X1 Carbon Gen 7.
 
+All firmware updates can be collected and installed at once with
+```
+sudo apt update && sudo apt upgrade -y
+sudo service fwupd start 
+sudo fwupdmgr refresh
+sudo fwupdmgr update
+```
+
 Also, though the page is specifically written for ArchLinux, [this wiki](https://wiki.archlinux.org/index.php/Lenovo_ThinkPad_X1_Carbon_(Gen_6))
 contains a good starting point for troubleshooting different issues.
