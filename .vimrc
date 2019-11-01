@@ -1,4 +1,3 @@
-
 " --- vim-plug packages---
 "
 " Plugins will be downloaded under the specified directory.
@@ -13,7 +12,6 @@ Plug 'xolox/vim-misc'
 Plug 'xolox/vim-notes'
 
 " Colorschemes
-Plug 'sonph/onehalf', {'rtp': 'vim/'}
 Plug 'tomasr/molokai'
 Plug 'dracula/vim', {'as': 'dracula'}
 
@@ -27,8 +25,8 @@ Plug 'vim-scripts/indentpython.vim'
 " Add file tree
 Plug 'scrooloose/nerdtree'
 
-" Flake8 syntax checker
-Plug 'nvie/vim-flake8'
+" Syntax checker
+Plug 'vim-syntastic/syntastic'
 
 " Code autocompleter
 Plug 'davidhalter/jedi-vim'
@@ -70,17 +68,32 @@ au BufNewFile,BufRead *.py
     \ set colorcolumn=99
 
 " Ensure UTF-8
+scriptencoding utf-8
 set encoding=utf-8
 
+" Establish pylint as linter
+let g:syntastic_python_checkers = ['pylint']
+
+" Suggested starting defaults while learning syntastic
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 0
+let g:syntastic_check_on_wq = 0
+
 " Invoke Flake8 checking with 'f8', autorun on write
-autocmd FileType python map <buffer> f8 :call Flake8()<CR>
-autocmd BufWritePost *.py call Flake8()
-let g:flake8_show_in_gutter=1
-let g:flake8_show_quickfix=1
-let g:flake8_max_markers=100
-let g:flake8_complexity_marker=''
-let g:flake8_error_marker='EE'
-let g:flake8_warning_marker='WW'
+" -- Going to install pylint, remove this block if it works
+" autocmd FileType python map <buffer> f8 :call Flake8()<CR>
+" autocmd BufWritePost *.py call Flake8()
+" let g:flake8_show_in_gutter=1
+" let g:flake8_show_quickfix=1
+" let g:flake8_max_markers=100
+" let g:flake8_complexity_marker=''
+" let g:flake8_error_marker='EE'
+" let g:flake8_warning_marker='WW'
 
 " Enable highlighting
 let g:python_highlight_all=1
@@ -121,3 +134,8 @@ nnoremap <C-H> <C-W><C-H>
 " Default new splits to either below or right of existing
 set splitbelow
 set splitright
+
+" Show all spaces as a center dot. Force the list of possible
+" characters to only show the dot, ignoring $ for EOL, etc.
+set list
+set listchars=space:·
