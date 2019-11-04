@@ -41,6 +41,7 @@ See the documentation link to help resolve cases where the laptop boots directly
       * Encryption and LVM left _unchecked_
 
 #### Post-Installation
+##### Temperature throttling
 There is a [noted issue](https://forums.lenovo.com/t5/Other-Linux-Discussions/X1C6-T480s-low-cTDP-and-trip-temperature-in-Linux/td-p/4028489/highlight/true/page/11) that involves temperature throttling when running Linux on certain Lenovo
 models, causing them to run less efficiently than if the same machines ran Windows. 
 The same linked forum page also provides both firmware and BIOS
@@ -71,3 +72,22 @@ sudo fwupdmgr install Lenovo...SystemFirmware-1.22.cab
 
 Also, though the page is specifically written for ArchLinux, [this wiki](https://wiki.archlinux.org/index.php/Lenovo_ThinkPad_X1_Carbon_(Gen_6))
 contains a good starting point for troubleshooting different issues.
+
+##### Volume up/down buttons
+The volume up and down keys (F2 and F3) show the volume level raising and lowering but don't actually make
+an impact in the sound level. Oddly enough, the mute key (F1) does work correctly. According to
+[this Reddit post](https://www.reddit.com/r/linux4noobs/comments/d44pdk/cannot_change_volume_can_muteunmute_ubuntu_1904/), edit
+`/usr/share/pulseaudio/alsa-mixer/paths/analog-output.conf.common`, adding the `[Element Master]` block directly above the
+existing `[Element PCM]` block.
+```
+[Element Master]
+switch = mute
+volume = ignore
+
+[Element PCM]
+switch = mute
+volume = merge
+override-map.1 = all
+override-map.2 = all-left,all-right
+```
+Upon restarting, things seemed to work as expected.
