@@ -28,9 +28,6 @@ Plug 'scrooloose/nerdtree'
 " Syntax checker
 Plug 'vim-syntastic/syntastic'
 
-" Code autocompleter
-Plug 'davidhalter/jedi-vim'
-
 " Python syntax highlighting
 Plug 'vim-python/python-syntax'
 
@@ -74,32 +71,22 @@ set encoding=utf-8
 " Establish pylint as linter
 let g:syntastic_python_checkers = ['pylint']
 
-" Suggested starting defaults while learning syntastic
+" Define warning labels for Syntastic
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 0
+" Only check on explict call to :SyntasticCheck
+let b:syntastic_mode = "passive"
+let g:syntastic_auto_loc_list = 2
 let g:syntastic_check_on_wq = 0
 
-" Invoke Flake8 checking with 'f8', autorun on write
-" -- Going to install pylint, remove this block if it works
-" autocmd FileType python map <buffer> f8 :call Flake8()<CR>
-" autocmd BufWritePost *.py call Flake8()
-" let g:flake8_show_in_gutter=1
-" let g:flake8_show_quickfix=1
-" let g:flake8_max_markers=100
-" let g:flake8_complexity_marker=''
-" let g:flake8_error_marker='EE'
-" let g:flake8_warning_marker='WW'
+" Map command for write and syntax check (normal mode only)
+nnoremap :wc :w <bar> :SyntasticCheck
+
 
 " Enable highlighting
 let g:python_highlight_all=1
-
-" Disable Jedi autocomplete
-let g:jedi#completions_enabled=0
 
 
 "
