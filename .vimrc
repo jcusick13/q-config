@@ -76,14 +76,17 @@ set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
+" Synstatic settings also recorded in
+" ~/.vim/after/plugin/syntastic.vim to avoid getting
+" clobbered by later plugins
+"
 " Only check on explict call to :SyntasticCheck
-let b:syntastic_mode = "passive"
+let g:syntastic_mode_map = {'mode': 'passive', 'active_filetypes': [], 'passive_filetypes': []}
 let g:syntastic_auto_loc_list = 2
 let g:syntastic_check_on_wq = 0
 
 " Map command for write and syntax check (normal mode only)
 nnoremap :wc :w <bar> :SyntasticCheck
-
 
 " Enable highlighting
 let g:python_highlight_all=1
