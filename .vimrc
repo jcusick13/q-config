@@ -128,4 +128,4 @@ set splitright
 " Show all spaces as a center dot. Force the list of possible
 " characters to only show the dot, ignoring $ for EOL, etc.
 set list
-set listchars=space:·
+set listchars=space:·,tab:>-
