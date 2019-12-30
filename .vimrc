@@ -31,6 +31,9 @@ Plug 'vim-syntastic/syntastic'
 " Python syntax highlighting
 Plug 'vim-python/python-syntax'
 
+" Python code formatter
+Plug 'psf/black'
+
 " Vimtex
 Plug 'lervag/vimtex'
 
@@ -67,6 +70,18 @@ au BufNewFile,BufRead *.py
 " Ensure UTF-8
 scriptencoding utf-8
 set encoding=utf-8
+
+" Run Black on save
+" Provide option to bypass Black when buffer variable `b:noEditBlack` is set
+let g:black_virtualenv="~/.vim_black"
+fun! Blacken()
+	if exists('b:noEditBlack')
+		return
+	endif
+	execute ':Black'
+endfun
+autocmd BufWritePre *.py call Blacken()
+
 
 " Establish pylint as linter
 let g:syntastic_python_checkers = ['pylint']
@@ -125,7 +140,7 @@ nnoremap <C-H> <C-W><C-H>
 set splitbelow
 set splitright
 
-" Show all spaces as a center dot. Force the list of possible
-" characters to only show the dot, ignoring $ for EOL, etc.
+" Show all spaces as a center dot, and dashes for tabs.
+" Ignoring $ for EOL (and any EOL char)
 set list
 set listchars=space:·,tab:>-
