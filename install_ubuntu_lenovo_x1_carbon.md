@@ -70,15 +70,16 @@ sudo snap start fwupd
 sudo fwupdmgr install Lenovo...SystemFirmware-1.22.cab
 ```
 
-Also, though the page is specifically written for ArchLinux, [this wiki](https://wiki.archlinux.org/index.php/Lenovo_ThinkPad_X1_Carbon_(Gen_6))
+Also, though the page is specifically written for ArchLinux,
+[this wiki](https://wiki.archlinux.org/index.php/Lenovo_ThinkPad_X1_Carbon_(Gen_6))
 contains a good starting point for troubleshooting different issues.
 
 ##### Volume up/down buttons
 The volume up and down keys (F2 and F3) show the volume level raising and lowering but don't actually make
 an impact in the sound level. Oddly enough, the mute key (F1) does work correctly. According to
 [this Reddit post](https://www.reddit.com/r/linux4noobs/comments/d44pdk/cannot_change_volume_can_muteunmute_ubuntu_1904/), edit
-`/usr/share/pulseaudio/alsa-mixer/paths/analog-output.conf.common`, adding the `[Element Master]` block directly above the
-existing `[Element PCM]` block.
+`/usr/share/pulseaudio/alsa-mixer/paths/analog-output.conf.common`, adding the
+`[Element Master]` block directly above the existing `[Element PCM]` block.
 ```
 [Element Master]
 switch = mute
@@ -91,3 +92,21 @@ override-map.1 = all
 override-map.2 = all-left,all-right
 ```
 Upon restarting, things seemed to work as expected.
+
+##### No volume when connected with HDMI
+When plugging in a second monitor with an HDMI cable, the speakers wouldn't play
+sound from either the second monitor or the laptop itself, listing "Dummy Output"
+as the only speaker set when trying to change the volume.
+
+The issue can be traced back to a bug mentioned
+[here](https://bugs.archlinux.org/task/64720). To resolve,
+a flag needs to be disabled as described originally in
+[this SO post](https://askubuntu.com/questions/1218041/ubuntu-18-04-audio-disappeared-after-update?newreg=0c78cbe09be048a29e59cd99f99019c1).
+
+Permanently disable the required option by editing `/etc/default/grub`.
+Find the line beginning with `GRUB_CMDLINE_LINUX_DEFAULT` and add
+`snd_hda_intel.dmic_detect=0` to the end of the line and changes should
+take effect upon rebooting. In order to first test this configuration, see
+[here](https://askubuntu.com/questions/19486/how-do-i-add-a-kernel-boot-parameter#19487)
+for how to temporarily add a boot parameter to a kernel.
+
