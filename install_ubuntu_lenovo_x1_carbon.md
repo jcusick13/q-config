@@ -1,6 +1,13 @@
 ## Ubuntu 18.04.3 LTS Installation
 Overview of steps taken to install Ubuntu on a new Lenovo Thinkpad X1 Carbon 7th Gen (Late 2019)
 
+* [Requirements](#requirements)
+* [Process](#process)
+* [Post-Installation](#post-installation)
+  * [Temperature throttling](#temperature-throttling)
+  * [Volume up/down buttons](#volume-up/down-buttons)
+  * [No volume when connected with HDMI](#no-volume-when-connected-with-hdmi)
+
 #### Requirements
 * 2 blank USB thumb drives (all other files will be deleted in the setup process)
   * 1 >= 4GB for Ubuntu image
