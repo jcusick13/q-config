@@ -112,7 +112,11 @@ a flag needs to be disabled as described originally in
 
 Permanently disable the required option by editing `/etc/default/grub`.
 Find the line beginning with `GRUB_CMDLINE_LINUX_DEFAULT` and add
-`snd_hda_intel.dmic_detect=0` to the end of the line and changes should
+`snd_hda_intel.dmic_detect=0` to the end of the line within the quotes.
+```
+GRUB_CMDLINE_LINUX_DEFAULT="quiet splash snd_hda_intel.dmic_detect=0"
+```
+Update GRUB with `sudo update-grub` and then changes should
 take effect upon rebooting. In order to first test this configuration, see
 [here](https://askubuntu.com/questions/19486/how-do-i-add-a-kernel-boot-parameter#19487)
 for how to temporarily add a boot parameter to a kernel.
