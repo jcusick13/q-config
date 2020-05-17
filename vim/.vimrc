@@ -65,7 +65,7 @@ au BufNewFile,BufRead *.py
     \ set expandtab |
     \ set autoindent |
     \ set fileformat=unix |
-    \ set colorcolumn=99
+    \ set colorcolumn=88
 
 " Ensure UTF-8
 scriptencoding utf-8
@@ -78,6 +78,7 @@ fun! Blacken()
 	if exists('b:noEditBlack')
 		return
 	endif
+	let g:black_skip_string_normalization=1
 	execute ':Black'
 endfun
 autocmd BufWritePre *.py call Blacken()
