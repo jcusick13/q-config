@@ -19,7 +19,8 @@ the action to perform when
   * `Mode_switch + Shift + Key`
 
 By changing the value of the third column for a given key, it will now update the behavior
-for pressing `Caps Lock + Key`.
+for pressing `Caps Lock + Key`. Once the appropriate changes are within `~/.Xmodmap`, they
+should take effect upon rebooting.
 
 
 
