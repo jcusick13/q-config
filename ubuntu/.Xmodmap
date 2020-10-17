@@ -1,0 +1,9 @@
+clear lock
+clear mod5
+keycode  66 = Mode_switch
+add mod5 = Mode_switch
+keycode  43 = h H Left H
+keycode  44 = j J Down K
+keycode  45 = k K Up K
+keycode  46 = l L Right L
+
