@@ -19,8 +19,19 @@ the action to perform when
   * `Mode_switch + Shift + Key`
 
 By changing the value of the third column for a given key, it will now update the behavior
-for pressing `Caps Lock + Key`. Once the appropriate changes are within `~/.Xmodmap`, they
-should take effect upon rebooting.
+for pressing `Caps Lock + Key`. 
+
+To ensure this behavior is automatically set on startup, create a new file within
+`~/.config/autostart` named `xmodmap.desktop`, adding the following.
+```
+[Desktop Entry]
+Name[en_US]=Xmodmap
+Comment[en_US]=xmodmap ~/.Xmodmap
+Exec=/usr/bin/xmodmap .Xmodmap
+Icon=application-default-icon
+X-GNOME-Autostart-enabled=true
+Type=Application
+```
 
 
 
