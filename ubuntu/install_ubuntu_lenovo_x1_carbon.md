@@ -7,6 +7,8 @@ Overview of steps taken to install Ubuntu on a new Lenovo Thinkpad X1 Carbon 7th
   * [Temperature throttling](#temperature-throttling)
   * [Volume up/down buttons](#volume-up/down-buttons)
   * [No volume when connected with HDMI](#no-volume-when-connected-with-hdmi)
+* [Upgrade to Ubuntu 20.04](#upgrade-to-ubuntu-20.04)
+  * [Misconfigured trackpad](#misconfigured-trackpad)
 
 #### Requirements
 * 2 blank USB thumb drives (all other files will be deleted in the setup process)
@@ -121,3 +123,17 @@ take effect upon rebooting. In order to first test this configuration, see
 [here](https://askubuntu.com/questions/19486/how-do-i-add-a-kernel-boot-parameter#19487)
 for how to temporarily add a boot parameter to a kernel.
 
+
+#### Upgrade to Ubuntu 20.04
+##### Misconfigured trackpad
+After upgrading, the trackpad began running into issues when using it to click. The
+mouse was still able to move fine when using the trackpad but clicking would act as
+if other keys (e.g. shift, etc) were also held down and open things in new tabs,
+close windows entirely, and other issues.
+
+Based on [this answer](https://askubuntu.com/questions/1235067/touchpad-stopped-working-20-04).
+
+Note, can boot into BIOS with the below.
+```
+sudo systemctl reboot --firmware
+```
