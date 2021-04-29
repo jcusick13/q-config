@@ -9,6 +9,7 @@ Overview of steps taken to install Ubuntu on a new Lenovo Thinkpad X1 Carbon 7th
   * [No volume when connected with HDMI](#no-volume-when-connected-with-hdmi)
 * [Upgrade to Ubuntu 20.04](#upgrade-to-ubuntu-20.04)
   * [Misconfigured trackpad](#misconfigured-trackpad)
+  * [Disable button 2](#disable-button-2)
 
 #### Requirements
 * 2 blank USB thumb drives (all other files will be deleted in the setup process)
@@ -137,3 +138,26 @@ Note, can boot into BIOS with the below.
 ```
 sudo systemctl reboot --firmware
 ```
+
+##### Disable button 2
+When clicking in the middle of the trackpad, unexpected behavior (somewhat alluded to
+above) was encountered. Using `xev`, it was determined the the center of the trackpad
+was allocated to `button 2`, as opposed to `button 1` for left-click and `button 3`
+for right-click.
+
+As described in [this answer](
+https://unix.stackexchange.com/questions/438725/disabling-middle-click-on-bottom-of-a-clickpad-touchpad),
+`xinput` can be used to disable the unwanted button. First, determine the device ID of the trackpad
+with `xinput list` (currently 12) and view the current button mapping.
+```
+xinput get-button-map 12
+1 2 3 4 5 6 7
+```
+Next, determine what the button mapping values correspond to with `xinput list 12`.
+After confirming that 2 in fact maps to `button 2`, set it to 1, left-click, to allocate the left
+two-thirds of the trackpad to left-click and the remaining right third to right-click.
+```
+xinput set-button-map 12 1 1 3 4 5 6 7
+```
+
+
